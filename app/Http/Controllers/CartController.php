@@ -35,13 +35,16 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $cart = Cart::where("user_id", Auth::id())->first();
+        if (!$cart) {
+            $cart = Cart::create(["user_id" => Auth::id()]);
+        }
         $request->validate([
-            "cart_id" => ["required", "exists:carts,id"],
             "product_id" => ["required", "exists:products,id"],
             "quantity" => ["required", "integer", "min:1"],
         ]);
         $cartItem = CartItem::create([
-            "cart_id" => $request->cart_id,
+            "cart_id" => $cart->id,
             "product_id" => $request->product_id,
             "quantity" => $request->quantity
         ]);

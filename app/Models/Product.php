@@ -19,6 +19,10 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
     use HasFactory;
 }

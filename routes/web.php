@@ -31,8 +31,11 @@ Route::middleware('is_admin')->group(function () {
 Route::middleware('user')->group(function () {
     Route::get('/products',  [ProductController::class, 'index'])->name('products.index');
     Route::get('/product/show/{id}', [ProductController::class, 'show'])->name('products.show');
-
     Route::get('/cart', action: [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{id}', action: [CartController::class, 'store'])->name('cart.store');
+    Route::delete('/cart/{id}', action: [CartController::class, 'destroy'])->name('cart.delete');
+
+    Route::get('/checkout',  [ProductController::class, 'create'])->name('cart.checkout');
 });
 
 
