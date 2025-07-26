@@ -2,12 +2,12 @@
 
     <div class="mt-4 py-6 max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <h1 class="text-xl font-semibold leading-tight text-gray-900">
-            Checkout
+            Edit order
         </h1>
 
-        <form action="{{route('order.store')}}" method="POST" class="mt-4">
+        <form action="{{route('orders.update', $order->id)}}" method="POST" class="mt-4">
             @csrf
-            @method('POST')
+            @method('PUT')
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -29,15 +29,15 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($cart->cartItems as $cartItem)
+                        @foreach ($order->orderItems as $item)
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 text-sm text-gray-900">{{ $cartItem->product->name }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-900">{{ $cartItem->quantity }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $item->product->name }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $item->quantity }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-900">
-                                    ${{ number_format($cartItem->product->price, 2) }}
+                                    ${{ number_format($item->product->price, 2) }}
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-900">
-                                    ${{ number_format(($cartItem->product->price) * $cartItem->quantity, 2) }}
+                                    ${{ number_format(($item->product->price) * $item->quantity, 2) }}
                                 </td>
                             </tr>
                         @endforeach
@@ -48,14 +48,14 @@
             <div class="mt-4 flex-col space-y-4 w-full">
                 <div class="w-full">
                     <label for="quantity" class="block text-sm font-medium text-gray-700">Shipping Address</label>
-                    <input type="text" name="shipping_address" value={{Auth::user()->address}}
+                    <input type="text" name="shipping_address" value={{$order->shipping_address}}
                         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
 
                 <div class="w-full flex items-end">
                     <button type="submit"
                         class="w-full inline-flex items-center justify-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Place Order
+                        Edit
                     </button>
                 </div>
             </div>

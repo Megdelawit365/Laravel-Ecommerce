@@ -38,7 +38,8 @@
                 </tbody>
             </table>
         </div>
-        <a href="" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4 inline-block">
+        <a href={{route('cart.checkout')}}
+            class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4 inline-block">
             Checkout</a>
     </div>
 </x-app-layout>

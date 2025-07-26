@@ -38,8 +38,6 @@
                                         Delete
                                     </button>
                                 </form>
-                                <a href="{{ route('admin.products.show', $product->id) }}"
-                                    class="text-indigo-600 hover:text-indigo-900 font-medium">Details</a>
                             </td>
                         </tr>
                     @endforeach
